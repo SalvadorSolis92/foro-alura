@@ -1,12 +1,11 @@
 package alura.api.foro.domain;
 
+import alura.api.foro.domain.autor.Autor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Table(name = "perfiles")
 @Entity(name = "Perfil")

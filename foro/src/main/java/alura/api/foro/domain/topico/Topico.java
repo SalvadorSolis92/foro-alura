@@ -1,5 +1,8 @@
-package alura.api.foro.domain;
+package alura.api.foro.domain.topico;
 
+import alura.api.foro.domain.autor.Autor;
+import alura.api.foro.domain.curso.Curso;
+import alura.api.foro.domain.Respuesta;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -38,4 +41,13 @@ public class Topico {
 
     @OneToMany(mappedBy = "")
     private List<Respuesta> respuestas;
+
+    public Topico(DatosRegistroTopico datosRegistroTopico, Curso curso, Autor autor) {
+        this.titulo =  datosRegistroTopico.titulo();
+        this.mensaje = datosRegistroTopico.mensaje();
+        this.fechaCreacion = LocalDateTime.now();
+        this.status = true;
+        this.curso = curso;
+        this.autor = autor;
+    }
 }
