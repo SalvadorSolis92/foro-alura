@@ -1,5 +1,6 @@
 package alura.api.foro.controller;
 
+import alura.api.foro.domain.topico.DatosDetalleTopico;
 import alura.api.foro.domain.topico.DatosRegistroTopico;
 import alura.api.foro.domain.topico.DatosRespuestaTopico;
 import alura.api.foro.service.TopicoService;
@@ -27,5 +28,11 @@ public class TopicoController {
     public ResponseEntity<List<DatosRespuestaTopico>> listarTopicos() {
         var topicos = this.topicoService.listarTopicos();
         return ResponseEntity.ok(topicos);
+    }
+
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<DatosDetalleTopico> detalleTopico(@PathVariable Long id) {
+        var topico = this.topicoService.buscarTopicoById(id);
+        return ResponseEntity.ok(topico);
     }
 }

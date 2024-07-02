@@ -1,5 +1,8 @@
 package alura.api.foro.service;
 
+import alura.api.foro.domain.autor.DatosAutor;
+import alura.api.foro.domain.curso.DatosCurso;
+import alura.api.foro.domain.topico.DatosDetalleTopico;
 import alura.api.foro.domain.topico.DatosRegistroTopico;
 import alura.api.foro.domain.topico.DatosRespuestaTopico;
 import alura.api.foro.domain.topico.Topico;
@@ -55,5 +58,20 @@ public class TopicoService {
                 t.getTitulo(), t.getMensaje(), t.getFechaCreacion(),
                 t.getStatus(), t.getAutor().getNombre(),
                 t.getCurso().getNombre() )).toList();
+    }
+
+    public DatosDetalleTopico buscarTopicoById(Long id){
+        var topicoDB = this.topicoRepository.findById(id);
+
+        if (!topicoDB.isPresent()){
+            throw new RuntimeException("No se encontró información del curso");
+        }else{
+            var topico = topicoDB.get();
+            var autor = new DatosAutor(topico.getAutor().getId(), topico.getAutor().getNombre(), topico.getAutor().getCorreoElectronico());
+            var curso = new DatosCurso(topico.getCurso().getId(), topico.getCurso().getNombre(), topico.getCurso().getCategoria());
+
+            return new DatosDetalleTopico(topico.getId(), topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(), topico.getStatus(), autor, curso);
+        }
+
     }
 }
