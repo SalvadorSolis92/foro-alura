@@ -13,38 +13,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/topicos")
 public class TopicoController {
 
     @Autowired
     private TopicoService topicoService;
 
-    @PostMapping("/registrar")
+    @PostMapping("/topicos")
     public ResponseEntity registrarTopico(@RequestBody @Valid DatosRegistroTopico topico) {
         this.topicoService.registrarTopico(topico);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/topicos")
     public ResponseEntity<List<DatosRespuestaTopico>> listarTopicos() {
         var topicos = this.topicoService.listarTopicos();
         return ResponseEntity.ok(topicos);
     }
 
-    @GetMapping("/detalle/{id}")
+    @GetMapping("/topicos/{id}")
     public ResponseEntity<DatosDetalleTopico> detalleTopico(@PathVariable Long id) {
         var topico = this.topicoService.buscarTopicoById(id);
         return ResponseEntity.ok(topico);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/topicos/{id}")
     @Transactional
     public ResponseEntity<DatosRegistroTopico> actualzatTopico(@PathVariable Long id, @RequestBody DatosRegistroTopico topico) {
         var topicoUpdate = this.topicoService.actualizarTopico(id, topico);
         return ResponseEntity.ok(topicoUpdate);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/topicos/{id}")
     @Transactional
     public ResponseEntity borrarTopico(@PathVariable Long id) {
         this.topicoService.borrarTopico(id);
