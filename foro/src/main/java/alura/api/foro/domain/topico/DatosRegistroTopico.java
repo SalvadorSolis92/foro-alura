@@ -17,8 +17,8 @@ public record DatosRegistroTopico(
         Long idCurso
 ) {
         public DatosRegistroTopico(String titulo, String mensaje, Long idAutor, Long idCurso) {
-                this.titulo = titulo;
-                this.mensaje = mensaje;
+                this.titulo = titulo.toUpperCase();
+                this.mensaje = mensaje.toUpperCase();
                 this.idAutor = idAutor;
                 this.idCurso = idCurso;
         }

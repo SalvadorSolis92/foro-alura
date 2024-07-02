@@ -38,7 +38,7 @@ public class TopicoController {
 
     @PutMapping("/topicos/{id}")
     @Transactional
-    public ResponseEntity<DatosRegistroTopico> actualzatTopico(@PathVariable Long id, @RequestBody DatosRegistroTopico topico) {
+    public ResponseEntity<DatosRegistroTopico> actualzatTopico(@PathVariable Long id, @RequestBody @Valid DatosRegistroTopico topico) {
         var topicoUpdate = this.topicoService.actualizarTopico(id, topico);
         return ResponseEntity.ok(topicoUpdate);
     }
