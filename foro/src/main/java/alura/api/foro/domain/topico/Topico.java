@@ -57,4 +57,7 @@ public class Topico {
         return this;
     }
 
+    public void desactivarTopico() {
+        this.status = false;
+    }
 }

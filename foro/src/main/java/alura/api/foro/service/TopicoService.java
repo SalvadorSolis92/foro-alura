@@ -57,7 +57,9 @@ public class TopicoService {
         return  topicosDB.stream().map( t -> new DatosRespuestaTopico(
                 t.getTitulo(), t.getMensaje(), t.getFechaCreacion(),
                 t.getStatus(), t.getAutor().getNombre(),
-                t.getCurso().getNombre() )).toList();
+                t.getCurso().getNombre() ))
+                .filter(f -> f.status() == true)
+                .toList();
     }
 
     public DatosDetalleTopico buscarTopicoById(Long id){
@@ -99,5 +101,15 @@ public class TopicoService {
             throw new RuntimeException("No se encontró registro del topico por actualizar");
         }
 
+    }
+
+    public void borrarTopico(Long id) {
+        var topicoDelete = this.topicoRepository.findById(id);
+
+        if (topicoDelete.isPresent()){
+            topicoDelete.get().desactivarTopico();
+        }else {
+            throw new RuntimeException("No se encontró registro del topico por borrar");
+        }
     }
 }
