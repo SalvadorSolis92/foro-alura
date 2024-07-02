@@ -50,4 +50,5 @@ public class Topico {
         this.curso = curso;
         this.autor = autor;
     }
+
 }
