@@ -1,7 +1,7 @@
 create table topicos(
     id int not null auto_increment,
-    titulo varchar(150) not null,
-    mensaje varchar(150) not null,
+    titulo varchar(150) not null unique,
+    mensaje varchar(150) not null unique,
     fecha_creacion date not null,
     status tinyint not null,
     autor_id int not null,

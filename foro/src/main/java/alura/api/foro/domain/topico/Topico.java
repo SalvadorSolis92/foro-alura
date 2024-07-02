@@ -23,8 +23,10 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String titulo;
 
+    @Column(nullable = false, unique = true)
     private String mensaje;
 
     private LocalDateTime fechaCreacion;
@@ -43,8 +45,8 @@ public class Topico {
     private List<Respuesta> respuestas;
 
     public Topico(DatosRegistroTopico datosRegistroTopico, Curso curso, Autor autor) {
-        this.titulo =  datosRegistroTopico.titulo();
-        this.mensaje = datosRegistroTopico.mensaje();
+        this.titulo =  datosRegistroTopico.titulo().toUpperCase();
+        this.mensaje = datosRegistroTopico.mensaje().toUpperCase();
         this.fechaCreacion = LocalDateTime.now();
         this.status = true;
         this.curso = curso;
