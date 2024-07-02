@@ -74,4 +74,30 @@ public class TopicoService {
         }
 
     }
+
+    public DatosRegistroTopico actualizarTopico(Long id, DatosRegistroTopico topicoUpdate) {
+
+        if (this.topicoRepository.existsById(id)){
+            var autor = autorService.obtenerAutorById(topicoUpdate.idAutor());
+            var curso = cursoService.obtenerCursoById(topicoUpdate.idCurso());
+
+            //valida si existe el curso
+            if (!autor.isPresent()){
+                throw new RuntimeException("No existe el autor");
+            }
+
+            //validar si existe el autor
+            if (!curso.isPresent()) {
+                throw new RuntimeException("No existe el autor");
+            }
+
+            Topico topicoDB = this.topicoRepository.findById(id).get();
+            topicoDB.actualizar(topicoUpdate);
+            return new DatosRegistroTopico(topicoDB.getTitulo(), topicoDB.getMensaje(), topicoDB.getAutor().getId(), topicoDB.getCurso().getId());
+
+        }else{
+            throw new RuntimeException("No se encontró registro del topico por actualizar");
+        }
+
+    }
 }

@@ -7,6 +7,7 @@ import alura.api.foro.service.TopicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,12 @@ public class TopicoController {
     public ResponseEntity<DatosDetalleTopico> detalleTopico(@PathVariable Long id) {
         var topico = this.topicoService.buscarTopicoById(id);
         return ResponseEntity.ok(topico);
+    }
+
+    @PutMapping("/update/{id}")
+    @Transactional
+    public ResponseEntity<DatosRegistroTopico> actualzatTopico(@PathVariable Long id, @RequestBody DatosRegistroTopico topico) {
+        var topicoUpdate = this.topicoService.actualizarTopico(id, topico);
+        return ResponseEntity.ok(topicoUpdate);
     }
 }

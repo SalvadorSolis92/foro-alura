@@ -16,4 +16,10 @@ public record DatosRegistroTopico(
         @NotNull(message = "debe indicarse el curso")
         Long idCurso
 ) {
+        public DatosRegistroTopico(String titulo, String mensaje, Long idAutor, Long idCurso) {
+                this.titulo = titulo;
+                this.mensaje = mensaje;
+                this.idAutor = idAutor;
+                this.idCurso = idCurso;
+        }
 }

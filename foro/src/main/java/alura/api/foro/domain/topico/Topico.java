@@ -51,4 +51,10 @@ public class Topico {
         this.autor = autor;
     }
 
+    public Topico actualizar(DatosRegistroTopico datos){
+        this.titulo = datos.titulo();
+        this.mensaje = datos.mensaje();
+        return this;
+    }
+
 }
