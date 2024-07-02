@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -21,11 +22,9 @@ public class TopicoController {
     private TopicoService topicoService;
 
     @PostMapping("/topicos")
-    public ResponseEntity<Map> registrarTopico(@RequestBody @Valid DatosRegistroTopico topico){
+    public ResponseEntity registrarTopico(@RequestBody @Valid DatosRegistroTopico topico){
         System.out.println("respondiendo desde topicos");
-        //this.topicoService.registrarTopico(topico);
-        Map<String, String> response = new HashMap<>();
-        response.put("mennsaje","seccess");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        this.topicoService.registrarTopico(topico);
+        return ResponseEntity.ok().build();
     }
 }
