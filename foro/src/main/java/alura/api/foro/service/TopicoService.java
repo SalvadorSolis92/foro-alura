@@ -46,7 +46,7 @@ public class TopicoService {
     }
 
     public Page<DatosRespuestaTopico> listarTopicos(Pageable paginacion) {
-        var topicosDB = this.topicoRepository.findAll(paginacion).map(DatosRespuestaTopico :: new);
+        var topicosDB = this.topicoRepository.findAll(paginacion).map(DatosRespuestaTopico :: new).filter(DatosRespuestaTopico::status);
 
         if(topicosDB == null){
             throw new RuntimeException("No se encontrarón resultados");
