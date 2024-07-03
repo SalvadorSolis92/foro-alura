@@ -22,4 +22,8 @@ public record DatosRespuestaTopico(
         this.autor = autor;
         this.curso = curso;
     }
+
+    public DatosRespuestaTopico(Topico topico) {
+        this(topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(), topico.getStatus(), topico.getAutor().getNombre(), topico.getCurso().getNombre());
+    }
 }

@@ -9,6 +9,8 @@ import alura.api.foro.domain.topico.Topico;
 import alura.api.foro.exception.ForoExceptionHandler;
 import alura.api.foro.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,8 +45,8 @@ public class TopicoService {
         this.topicoRepository.save(nuevoTopico);
     }
 
-    public List<DatosRespuestaTopico> listarTopicos() {
-        var topicosDB = this.topicoRepository.findAll();
+    public Page<DatosRespuestaTopico> listarTopicos(Pageable paginacion) {
+        var topicosDB = this.topicoRepository.findAll(paginacion).map(DatosRespuestaTopico :: new);
 
         if(topicosDB == null){
             throw new RuntimeException("No se encontrarón resultados");
@@ -54,12 +56,7 @@ public class TopicoService {
             throw new RuntimeException("No se han registrado topicos en el foro");
         }
 
-        return  topicosDB.stream().map( t -> new DatosRespuestaTopico(
-                t.getTitulo(), t.getMensaje(), t.getFechaCreacion(),
-                t.getStatus(), t.getAutor().getNombre(),
-                t.getCurso().getNombre() ))
-                .filter(f -> f.status() == true)
-                .toList();
+        return  topicosDB;
     }
 
     public DatosDetalleTopico buscarTopicoById(Long id){

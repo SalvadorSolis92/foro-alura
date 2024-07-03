@@ -6,6 +6,9 @@ import alura.api.foro.domain.topico.DatosRespuestaTopico;
 import alura.api.foro.service.TopicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +28,8 @@ public class TopicoController {
     }
 
     @GetMapping("/topicos")
-    public ResponseEntity<List<DatosRespuestaTopico>> listarTopicos() {
-        var topicos = this.topicoService.listarTopicos();
+    public ResponseEntity<Page<DatosRespuestaTopico>> listarTopicos(@PageableDefault(size = 10) Pageable paginacion) {
+        var topicos = this.topicoService.listarTopicos(paginacion);
         return ResponseEntity.ok(topicos);
     }
 
