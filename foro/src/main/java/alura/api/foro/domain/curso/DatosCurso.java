@@ -1,7 +1,5 @@
 package alura.api.foro.domain.curso;
 
-import alura.api.foro.domain.Categoria;
-
 public record DatosCurso(
         Long id,
         String nombre,

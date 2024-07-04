@@ -1,4 +1,4 @@
-package alura.api.foro.domain;
+package alura.api.foro.domain.curso;
 
 public enum Categoria {
     PROGRAMACION("Cursos relacionados con programación y desarrollo de software"),

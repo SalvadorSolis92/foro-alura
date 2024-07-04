@@ -1,4 +1,4 @@
-package alura.api.foro.domain;
+package alura.api.foro.domain.security;
 
 import alura.api.foro.domain.autor.Autor;
 import jakarta.persistence.*;
