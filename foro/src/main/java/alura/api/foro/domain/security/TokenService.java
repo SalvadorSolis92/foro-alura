@@ -1,10 +1,10 @@
 package alura.api.foro.domain.security;
 
-import alura.api.foro.domain.autor.Autor;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -17,13 +17,13 @@ public class TokenService {
     @Value("${api.security.secret}")
     private String apiSecret;
 
-    public String generarToken(Autor usuario){
+    public String generarToken(Authentication usuario){
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             return JWT.create()
                     .withIssuer("foro alura")
-                    .withSubject(usuario.getCorreoElectronico())
-                    .withClaim("id", usuario.getId())
+                    .withSubject(usuario.getName())
+                    .withClaim("usuario", usuario.getName())
                     .withExpiresAt(generarFechaExpiracion())
                     .sign(algorithm);
 
