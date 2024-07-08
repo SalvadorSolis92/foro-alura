@@ -37,6 +37,12 @@ public class UsuariosController {
         return ResponseEntity.ok(listaUsuarios);
     }
 
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity borrarUsuario(@PathVariable Long id){
+        usuarioService.borrarUsuario(id);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 }

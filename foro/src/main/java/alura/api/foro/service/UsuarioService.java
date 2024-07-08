@@ -79,4 +79,16 @@ public class UsuarioService implements UserDetailsService {
 
         return listaUsuarios;
     }
+
+    @Transactional
+    public void borrarUsuario(Long id) {
+        var usuarioDelete = usuarioRepository.findById(id);
+
+        if (usuarioDelete.isPresent()) {
+            var usuario = usuarioDelete.get();
+            usuarioRepository.delete(usuario);
+        }else {
+            throw new RuntimeException("No se encontró registro del usuario");
+        }
+    }
 }
