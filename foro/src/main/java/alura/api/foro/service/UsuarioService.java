@@ -11,8 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,16 +53,30 @@ public class UsuarioService implements UserDetailsService {
 
     }
 
-    public void actualizarUsuario(DatosUpdateUsuario datos) {
+    @Transactional
+    public Usuario actualizarUsuario(DatosUpdateUsuario datos) {
         var usuario = usuarioRepository.findById(datos.id());
 
-        if (!usuario.isPresent()) {
-            throw new RuntimeException("No se enontro al usuario");
+        if (usuario.isPresent()) {
+            var usuarioUpdate = usuario.get();
+            return usuarioUpdate.actualizarInfo(datos);
+        }else {
+            throw new RuntimeException("User not found with id: " + datos.id());
         }
 
-        var usuarioUpdate = usuario.get();
+    }
 
-        usuarioUpdate.actualizarInfo(datos);
+    public List<DatosUsuario> listarUsuarios() {
+        var usuarios = this.usuarioRepository.findAll();
 
+        if (usuarios == null) {
+            throw new RuntimeException("No se puedo listar el padrón de usuarios");
+        }
+
+        List<DatosUsuario> listaUsuarios = usuarios
+                .stream()
+                .map(u -> new DatosUsuario(u.getId(), u.getNombre(), u.getCorreoElectronico())).toList();
+
+        return listaUsuarios;
     }
 }

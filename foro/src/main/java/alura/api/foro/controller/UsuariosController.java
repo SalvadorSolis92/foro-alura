@@ -8,10 +8,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
@@ -26,12 +25,18 @@ public class UsuariosController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/actualizar")
-    @Transactional
+    @PutMapping("/actualizar")
     public ResponseEntity registrarUsuario(@RequestBody @Valid DatosUpdateUsuario datos){
-        usuarioService.actualizarUsuario(datos);
-        return ResponseEntity.ok().build();
+        var usuario = usuarioService.actualizarUsuario(datos);
+        return ResponseEntity.ok(new DatosUpdateUsuario(usuario.getId(), usuario.getNombre(), usuario.getCorreoElectronico()));
     }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<DatosUsuario>> listarUsuarios(){
+        var listaUsuarios = usuarioService.listarUsuarios();
+        return ResponseEntity.ok(listaUsuarios);
+    }
+
 
 
 }

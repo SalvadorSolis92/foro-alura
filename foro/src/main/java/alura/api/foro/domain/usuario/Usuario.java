@@ -75,14 +75,16 @@ public class Usuario implements UserDetails{
         return true;
     }
 
-    public void actualizarInfo(DatosUpdateUsuario datos) {
+    public Usuario actualizarInfo(DatosUpdateUsuario datos) {
 
-        if (datos.correo() == null) {
-            correoElectronico = datos.correo();
+        if (datos.correo() != null) {
+            this.correoElectronico = datos.correo();
         }
 
-        if (datos.nombre() == null) {
-            nombre = datos.nombre();
+        if (datos.nombre() != null) {
+            this.nombre = datos.nombre();
         }
+
+        return this;
     }
 }
