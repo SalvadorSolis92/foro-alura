@@ -1,19 +1,16 @@
 package alura.api.foro.service;
 
-import alura.api.foro.domain.autor.DatosAutor;
+import alura.api.foro.domain.usuario.DatosUsuario;
 import alura.api.foro.domain.curso.DatosCurso;
 import alura.api.foro.domain.topico.DatosDetalleTopico;
 import alura.api.foro.domain.topico.DatosRegistroTopico;
 import alura.api.foro.domain.topico.DatosRespuestaTopico;
 import alura.api.foro.domain.topico.Topico;
-import alura.api.foro.exception.ForoExceptionHandler;
 import alura.api.foro.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TopicoService {
@@ -25,10 +22,10 @@ public class TopicoService {
     private CursoService cursoService;
 
     @Autowired
-    private AutorService autorService;
+    private UsuarioService usuarioService;
 
     public void registrarTopico(DatosRegistroTopico datosRegistroTopico) {
-        var autor = autorService.obtenerAutorById(datosRegistroTopico.idAutor());
+        var autor = usuarioService.obtenerAutorById(datosRegistroTopico.idAutor());
         var curso = cursoService.obtenerCursoById(datosRegistroTopico.idCurso());
 
         //valida si existe el curso
@@ -66,7 +63,7 @@ public class TopicoService {
             throw new RuntimeException("No se encontró información del curso");
         }else{
             var topico = topicoDB.get();
-            var autor = new DatosAutor(topico.getAutor().getId(), topico.getAutor().getNombre(), topico.getAutor().getCorreoElectronico());
+            var autor = new DatosUsuario(topico.getAutor().getId(), topico.getAutor().getNombre(), topico.getAutor().getCorreoElectronico());
             var curso = new DatosCurso(topico.getCurso().getId(), topico.getCurso().getNombre(), topico.getCurso().getCategoria());
 
             return new DatosDetalleTopico(topico.getId(), topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(), topico.getStatus(), autor, curso);
@@ -77,7 +74,7 @@ public class TopicoService {
     public DatosRegistroTopico actualizarTopico(Long id, DatosRegistroTopico topicoUpdate) {
 
         if (this.topicoRepository.existsById(id)){
-            var autor = autorService.obtenerAutorById(topicoUpdate.idAutor());
+            var autor = usuarioService.obtenerAutorById(topicoUpdate.idAutor());
             var curso = cursoService.obtenerCursoById(topicoUpdate.idCurso());
 
             //valida si existe el curso

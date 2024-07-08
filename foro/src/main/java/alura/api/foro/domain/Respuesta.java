@@ -1,6 +1,6 @@
 package alura.api.foro.domain;
 
-import alura.api.foro.domain.autor.Autor;
+import alura.api.foro.domain.usuario.Usuario;
 import alura.api.foro.domain.topico.Topico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class Respuesta {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
-    private Autor autor;
+    private Usuario autor;
 
     private String solucion;
 

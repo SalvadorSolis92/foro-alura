@@ -1,6 +1,6 @@
 package alura.api.foro.domain.security;
 
-import alura.api.foro.domain.autor.Autor;
+import alura.api.foro.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -21,8 +21,8 @@ public class Perfil {
 
     private String nombre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "autor_id")
-    private Autor autor;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "autor_id")
+//    private Usuario autor;
 
 }

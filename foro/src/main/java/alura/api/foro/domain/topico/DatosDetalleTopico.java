@@ -1,6 +1,6 @@
 package alura.api.foro.domain.topico;
 
-import alura.api.foro.domain.autor.DatosAutor;
+import alura.api.foro.domain.usuario.DatosUsuario;
 import alura.api.foro.domain.curso.DatosCurso;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -13,7 +13,7 @@ public record DatosDetalleTopico(
         @JsonFormat(pattern = "dd-MM-yyyy")
         LocalDateTime fechaCreacion,
         Boolean status,
-        DatosAutor autor,
+        DatosUsuario autor,
         DatosCurso curso
 ) {
 }

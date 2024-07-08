@@ -1,4 +1,4 @@
-package alura.api.foro.domain.autor;
+package alura.api.foro.domain.usuario;
 
 import alura.api.foro.domain.security.Perfil;
 import jakarta.persistence.*;
@@ -14,12 +14,12 @@ import java.util.Collection;
 import java.util.List;
 
 @Table(name = "usuarios")
-@Entity(name = "Autor")
+@Entity(name = "Usuario")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Autor implements UserDetails{
+public class Usuario implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +31,13 @@ public class Autor implements UserDetails{
 
     private String contrasenia;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(
-            name = "usuarios_perfiles",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "perfil_id")
-    )
-    private List<Perfil> perfiles;
+//    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+//    @JoinTable(
+//            name = "usuarios_perfiles",
+//            joinColumns = @JoinColumn(name = "usuario_id"),
+//            inverseJoinColumns = @JoinColumn(name = "perfil_id")
+//    )
+//    private List<Perfil> perfiles;
 
 
     @Override

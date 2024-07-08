@@ -1,8 +1,5 @@
 package alura.api.foro.domain.topico;
 
-import alura.api.foro.domain.autor.DatosAutor;
-import alura.api.foro.domain.curso.DatosCurso;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

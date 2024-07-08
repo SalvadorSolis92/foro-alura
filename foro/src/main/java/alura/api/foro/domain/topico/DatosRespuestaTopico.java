@@ -1,6 +1,5 @@
 package alura.api.foro.domain.topico;
 
-import alura.api.foro.domain.autor.Autor;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;

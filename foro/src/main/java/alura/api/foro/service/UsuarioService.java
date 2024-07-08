@@ -1,32 +1,29 @@
 package alura.api.foro.service;
 
-import alura.api.foro.domain.autor.Autor;
-import alura.api.foro.repository.AutorRepository;
+import alura.api.foro.domain.usuario.Usuario;
+import alura.api.foro.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Service
-public class AutorService implements UserDetailsService {
+public class UsuarioService implements UserDetailsService {
 
     @Autowired
-    private AutorRepository autorRepository;
+    private UsuarioRepository usuarioRepository;
 
-    public Boolean existeAutor(Long idAutor){
-        return this.autorRepository.existsById(idAutor);
-    }
-
-    public Optional<Autor> obtenerAutorById(Long idAutor) {
-        return this.autorRepository.findById(idAutor);
+    public Optional<Usuario> obtenerAutorById(Long idAutor) {
+        return usuarioRepository.findById(idAutor);
     }
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-        var usuario = autorRepository.findBycorreoElectronico(correo);
+        Usuario usuario = usuarioRepository.findBycorreoElectronico(correo);
 
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuario no encontrado");

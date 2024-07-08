@@ -1,6 +1,6 @@
 package alura.api.foro.domain.topico;
 
-import alura.api.foro.domain.autor.Autor;
+import alura.api.foro.domain.usuario.Usuario;
 import alura.api.foro.domain.curso.Curso;
 import alura.api.foro.domain.Respuesta;
 import jakarta.persistence.*;
@@ -35,7 +35,7 @@ public class Topico {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
-    private Autor autor;
+    private Usuario autor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
@@ -44,7 +44,7 @@ public class Topico {
     @OneToMany(mappedBy = "")
     private List<Respuesta> respuestas;
 
-    public Topico(DatosRegistroTopico datosRegistroTopico, Curso curso, Autor autor) {
+    public Topico(DatosRegistroTopico datosRegistroTopico, Curso curso, Usuario autor) {
         this.titulo =  datosRegistroTopico.titulo().toUpperCase();
         this.mensaje = datosRegistroTopico.mensaje().toUpperCase();
         this.fechaCreacion = LocalDateTime.now();

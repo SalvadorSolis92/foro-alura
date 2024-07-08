@@ -1,7 +1,7 @@
 package alura.api.foro.security;
 
 import alura.api.foro.domain.security.TokenService;
-import alura.api.foro.repository.AutorRepository;
+import alura.api.foro.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +22,10 @@ public class SecutiryFilter extends OncePerRequestFilter {
     private String apiSecret;
 
     @Autowired
-    private AutorRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private TokenService tokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -31,8 +34,15 @@ public class SecutiryFilter extends OncePerRequestFilter {
 
         if (token != null ) {
             // Si no tiene token o el token no es válido, permite que la solicitud pase al siguiente filtro
-            System.out.println("hacer autenticacion con token");
-            //return;
+            token = token.replace("Bearer ", "");
+            var subject = tokenService.getSubject(token);
+
+            if (subject != null) {//validando subject
+                //token valido
+                var usuario = usuarioRepository.findBycorreoElectronico(subject);
+                var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);//forzamos el inicio de sesion
+            }
         }
 
         // Continúa con el filtro
