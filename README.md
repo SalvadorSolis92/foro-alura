@@ -10,6 +10,14 @@ A continuación, se detallan los pasos para configurar, construir y ejecutar el 
 - Spring Boot: 3.3.1
 - MySQL: 8.0.38
 
+# Documentación de la API
+
+Este proyecto utiliza OpenAPI para la documentación de la API, facilitando así la comprensión y el uso de los diferentes endpoints disponibles.
+Puedes consultar la documentación a través de Swagger UI, una vez que la aplicación esté en ejecución es accesible desde
+```
+http://localhost:8084/foro/swagger-ui/index.html
+```
+
 ## Configuración de Versiones
 
 ### Java
@@ -76,12 +84,4 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/foro_alura
 spring.datasource.username=user
 spring.datasource.password=password
-```
-
-# Documentación de la API
-
-Este proyecto utiliza OpenAPI para la documentación de la API, facilitando así la comprensión y el uso de los diferentes endpoints disponibles.
-Puedes consultar la documentación a través de Swagger UI, una vez que la aplicación esté en ejecución es accesible desde
-```
-http://localhost:8084/foro/swagger-ui/index.html
 ```
