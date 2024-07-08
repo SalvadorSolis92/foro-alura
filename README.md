@@ -83,5 +83,5 @@ spring.datasource.password=password
 Este proyecto utiliza OpenAPI para la documentación de la API, facilitando así la comprensión y el uso de los diferentes endpoints disponibles.
 Puedes consultar la documentación a través de Swagger UI, una vez que la aplicación esté en ejecución es accesible desde
 ```
-http://localhost:8084/swagger-ui.html
+http://localhost:8084/foro/swagger-ui/index.html
 ```
