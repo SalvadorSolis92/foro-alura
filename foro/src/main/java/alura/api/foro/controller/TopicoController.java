@@ -4,6 +4,7 @@ import alura.api.foro.domain.topico.DatosDetalleTopico;
 import alura.api.foro.domain.topico.DatosRegistroTopico;
 import alura.api.foro.domain.topico.DatosRespuestaTopico;
 import alura.api.foro.service.TopicoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Tag(name = "Topicos", description = "Operaciones CRUD para los topicos del foro")//para documentacion
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired
