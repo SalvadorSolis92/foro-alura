@@ -59,7 +59,6 @@ public class TokenService {
             throw new RuntimeException("error al validar token");
         }
 
-        System.out.println(verifierd);
         if (verifierd == null){
             throw new RuntimeException("verifier invalido");
         }else {
