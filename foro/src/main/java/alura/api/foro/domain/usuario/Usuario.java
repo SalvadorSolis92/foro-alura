@@ -74,4 +74,15 @@ public class Usuario implements UserDetails{
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
+    public void actualizarInfo(DatosUpdateUsuario datos) {
+
+        if (datos.correo() == null) {
+            correoElectronico = datos.correo();
+        }
+
+        if (datos.nombre() == null) {
+            nombre = datos.nombre();
+        }
+    }
 }
